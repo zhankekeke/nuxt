@@ -1,9 +1,13 @@
-<style>
-
+<style lang="less" scoped>
+.index{
+    color:red;
+    font-size:16px;
+   
+}
 </style>
 <template>
     <section>
-       <nuxt-link to="/">首页</nuxt-link>
+       <nuxt-link to="/" class="index">首页</nuxt-link>
         <nuxt-link to="./products/product">商品页</nuxt-link>
 
     </section>

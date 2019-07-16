@@ -29,7 +29,9 @@ module.exports = {
     ],
   css:[
     '~assets/css/resets.css',
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/index.css',
+    { src: '~assets/css/main.less', lang: 'less' }
+   
   ],
   modules: [
         '@nuxtjs/axios',

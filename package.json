@@ -16,6 +16,8 @@
     "@nuxtjs/axios": "^5.5.4",
     "element-ui": "^2.10.1",
     "iview": "^3.4.2",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {

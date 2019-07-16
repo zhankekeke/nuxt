@@ -1,9 +1,10 @@
+
 <template>
   <section class="container">
     <div>
       <loading/>
       <h1 class="title">
-        nuxt
+        {{info}}
       </h1>
       <loading/>
       <div class="links">
@@ -18,6 +19,7 @@
 <script>
 import AppLogo from '~/components/AppLogo.vue'
 import Loading from '~/components/loading.vue'
+import axios from 'axios'
 export default {
    components: {
     AppLogo,
@@ -30,14 +32,43 @@ export default {
       this.$nuxt.$loading.finish()
     }, 1000)
    },
- 
+ asyncData () {
+   //let data ={}
+   return  axios({
+     method:'get',
+     url:'https://api.myjson.com/bins/1dkbio',
+     data:{}
+   }).then(res=>{
+    //  console.log(res)
+    console.log(res)
+    return {info:res.data.name}
+   })
+    //return { info: data.data }
+    
+     },
   data(){
     return{
 
     }
   },
   methods:{
-   button(){
+   async button(){
+       let data ={}
+       data = await axios.get(`https://api.myjson.com/bins/1dkbio`)
+       console.log(data)
+       let arr =[ ]
+       arr.push(data)
+       console.log(arr)
+        for(var i=0;i<arr.length;i++){
+          let arrer={}
+          arrer={
+            id:arr[i].data.age,
+            name:arr[i].data.name
+          }
+          console.log(arrer)
+        }
+       console.log(arr)
+       return {info:data.data}
       this.$nuxt.$loading.start()
      //console.log(111)
       setTimeout(() => {
@@ -50,7 +81,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .container {
   min-height: 100vh;
   display: flex;
