@@ -13,12 +13,19 @@
     </section>
 </template>
 <script>
+import axios from '~/plugins/axios'
     export default{
         data(){
             return{
-
+               info:{}
             }
         },
+        // asyncData(params){
+        //     let name = this.$route.query.item
+        //     console.log(name)
+        // //    console.log($route.query.item)
+        // // return {info:$route.query.item }
+        // },
         // mounted () {
         //     this.$nextTick(() => {
         //     this.$nuxt.$loading.start()
@@ -26,6 +33,9 @@
         //     setTimeout(() => this.$nuxt.$loading.finish(), 1000)
         //     })
         // },
+       created(){
+          console.log(this.$route.query.item)
+       },
         methods:{
 
         }

@@ -3,9 +3,9 @@
   <section class="container">
     <div>
       <loading/>
-      <h1 class="title">
-        {{info}}
-      </h1>
+       <ul>
+        <li v-for="(item,index) in info" :key="index" @click="go(item)"> {{item.name}}</li>  
+       </ul>
       <loading/>
       <div class="links">
        <nuxt-link to="/lists/list" >go to</nuxt-link>
@@ -19,11 +19,19 @@
 <script>
 import AppLogo from '~/components/AppLogo.vue'
 import Loading from '~/components/loading.vue'
-import axios from 'axios'
+//import axios from 'axios'
+import axios from '~/plugins/axios'
+
 export default {
    components: {
     AppLogo,
     Loading
+  },
+  data(){
+    return{
+  info:[],
+  infos:[]
+    }
   },
   loading:false,
    mounted(){
@@ -32,49 +40,39 @@ export default {
       this.$nuxt.$loading.finish()
     }, 1000)
    },
- asyncData () {
-   //let data ={}
+ asyncData ({params}){
    return  axios({
      method:'get',
-     url:'https://api.myjson.com/bins/1dkbio',
+     url:'bins/zbgmt',
      data:{}
    }).then(res=>{
-    //  console.log(res)
-    console.log(res)
-    return {info:res.data.name}
+     //debugger;
+     if(res.status === 200){
+       console.log(res.data)
+      return {info:res.data}
+
+     }
+   }).catch(()=>{
+
    })
     //return { info: data.data }
     
      },
-  data(){
-    return{
-
-    }
-  },
   methods:{
-   async button(){
-       let data ={}
-       data = await axios.get(`https://api.myjson.com/bins/1dkbio`)
-       console.log(data)
-       let arr =[ ]
-       arr.push(data)
-       console.log(arr)
-        for(var i=0;i<arr.length;i++){
-          let arrer={}
-          arrer={
-            id:arr[i].data.age,
-            name:arr[i].data.name
-          }
-          console.log(arrer)
-        }
-       console.log(arr)
-       return {info:data.data}
-      this.$nuxt.$loading.start()
-     //console.log(111)
-      setTimeout(() => {
-         this.$router.push('./lists/list')
-      }, 1000)
-    
+   async go(item){
+     console.log(item)
+     console.log(9999)
+      let data = {}
+      //debugger;
+     data = await axios.get(`https://api.myjson.com/bins/172b7p`)
+     // let data ={}
+      //  data = await axios.get('bins/172b7p')
+    this.$router.push({
+      path:'/lists/list',
+      query:{
+        item:item
+      }
+    })
    }
   }
 
