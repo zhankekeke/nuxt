@@ -6,7 +6,6 @@
        <ul>
         <li v-for="(item,index) in info" :key="index" @click="go(item)"> {{item.name}}</li>  
        </ul>
-      <loading/>
       <div class="links">
        <nuxt-link to="/lists/list" >go to</nuxt-link>
       </div>
@@ -64,7 +63,16 @@ export default {
      console.log(9999)
       let data = {}
       //debugger;
-     data = await axios.get(`https://api.myjson.com/bins/172b7p`)
+      await axios({
+       methods:'get',
+       url:`https://api.myjson.com/bins/172b7p`,
+       data:{},
+       headers:{"Content-type": "application/json"}
+     }).then((res)=>{
+      data = res.data
+       console.log(data)
+
+     })
      // let data ={}
       //  data = await axios.get('bins/172b7p')
     this.$router.push({
